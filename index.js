@@ -1,26 +1,20 @@
-const seedCategories = require('./category-seeds');
-const seedProducts = require('./product-seeds');
-const seedTags = require('./tag-seeds');
-const seedProductTags = require('./product-tag-seeds');
+// import models
+const Product = require('./Product');
+const Category = require('./Category');
+const Tag = require('./Tag');
+const ProductTag = require('./ProductTag');
 
-const sequelize = require('../config/connection');
+// Products belongsTo Category
 
-const seedAll = async () => {
-  await sequelize.sync({ force: true });
-  console.log('\n----- DATABASE SYNCED -----\n');
-  await seedCategories();
-  console.log('\n----- CATEGORIES SEEDED -----\n');
+// Categories have many Products
 
-  await seedProducts();
-  console.log('\n----- PRODUCTS SEEDED -----\n');
+// Products belongToMany Tags (through ProductTag)
 
-  await seedTags();
-  console.log('\n----- TAGS SEEDED -----\n');
+// Tags belongToMany Products (through ProductTag)
 
-  await seedProductTags();
-  console.log('\n----- PRODUCT TAGS SEEDED -----\n');
-
-  process.exit(0);
+module.exports = {
+  Product,
+  Category,
+  Tag,
+  ProductTag,
 };
-
-seedAll();
