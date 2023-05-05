@@ -75,6 +75,28 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  // console log error and send message if tag does not exist
+  Tag.update(
+    {
+      tag_name: req.body.tag_name
+    },
+    {
+      where: {
+        id: req.params.id
+      }
+    }
+  )
+  .then(dbTagData => {
+    if (!dbTagData) {
+      res.status(404).json({ message: 'The tag you are trying to update does not exist!' });
+      return;
+    }
+    res.json(dbTagData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
