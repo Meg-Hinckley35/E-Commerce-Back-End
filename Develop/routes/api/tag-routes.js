@@ -101,6 +101,23 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
+  // console log error and send message if tag does not exist
+  Tag.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(dbTagData => {
+    if (!dbTagData) {
+      res.status(404).json({ message: 'The tag you are trying to delete does not exist!' });
+      return;
+    }
+    res.json(dbTagData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
