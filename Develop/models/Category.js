@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const { INTEGER } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
