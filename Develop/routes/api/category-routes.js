@@ -100,6 +100,28 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  //use a delete request to remove an existing category
+  //sends an error message if category does not exist
+  Category.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+  .then((dbCategoryData) => {
+    if (!dbCategoryData) {
+      res
+        .status(404)
+        .json({
+          message: "The category you are trying to delete does not exist!",
+        });
+      return;
+    }
+    res.json(dbCategoryData);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
