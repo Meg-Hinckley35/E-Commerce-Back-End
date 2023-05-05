@@ -69,6 +69,33 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  //use a post request to update an existing category
+  //sends an error message if category does not exist
+  Category.update(
+    {
+      category_name: req.body.category_name,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+  .then((dbCategoryData) => {
+    if (!dbCategoryData) {
+      res
+        .status(404)
+        .json({
+          message: "The category you are trying to update does not exist!",
+        });
+      return;
+    }
+    res.json(dbCategoryData);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
