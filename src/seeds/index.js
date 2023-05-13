@@ -24,3 +24,9 @@ const seedAll = async () => {
 };
 
 seedAll();
+
+db.sync({force: false})
+.then(() => {
+  console.log('db synced')
+  app.listen(PORT, () => console.log(`your server is running on ${PORT}`))
+});
