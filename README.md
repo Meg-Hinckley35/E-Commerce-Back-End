@@ -5,6 +5,7 @@
 ## Description
 🔍 A mysql database and application backend for an e-commerce site. Built using MySQL2, Express, Sequelize and dotenv.
 
+<img width="1026" alt="Screenshot 2023-05-12 at 11 08 24 PM" src="https://github.com/Meg-Hinckley35/E-Commerce-Back-End/assets/116989994/67af860d-8435-4d93-9826-02147d80b209">
 
 
 
